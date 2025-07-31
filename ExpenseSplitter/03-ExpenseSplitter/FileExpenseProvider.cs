@@ -1,7 +1,7 @@
-using ExpenseSplitter.Core;
-using ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._99_IODA_BuildingBlocks;
 
-namespace ExpenseSplitter.Providers;
+namespace ExpenseSplitter._03_ExpenseSplitter;
 
 /// <summary>
 /// Expense repository - loads expenses from file

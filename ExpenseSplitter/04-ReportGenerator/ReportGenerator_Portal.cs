@@ -1,7 +1,7 @@
-using ExpenseSplitter.Core;
-using ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter.Portals;
+namespace ExpenseSplitter._04_ReportGenerator;
 
 /// <summary>
 /// Report Generator - generates detailed reports from payments

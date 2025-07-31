@@ -1,4 +1,4 @@
-namespace ExpenseSplitter.DataContracts;
+namespace ExpenseSplitter._03_ExpenseSplitter.DataContracts;
 
 /// <summary>
 /// Result of expense validation

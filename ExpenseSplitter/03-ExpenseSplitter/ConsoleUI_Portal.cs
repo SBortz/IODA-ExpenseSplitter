@@ -1,12 +1,12 @@
-using ExpenseSplitter.Core;
-using ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter.Portals;
+namespace ExpenseSplitter._03_ExpenseSplitter;
 
 /// <summary>
 /// Console UI - handles user interaction and display
 /// </summary>
-public class ConsoleUI_Portal : IPortal
+public class ConsoleUI_Portal : IConsoleUI_Portal
 {
     /// <summary>
     /// Print payments to console

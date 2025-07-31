@@ -1,7 +1,7 @@
-using ExpenseSplitter.Portals;
-using ExpenseSplitter.Processors;
+using ExpenseSplitter._03_ExpenseSplitter.Interfaces;
+using ExpenseSplitter._99_IODA_BuildingBlocks;
 
-namespace ExpenseSplitter.Application;
+namespace ExpenseSplitter._01_Application;
 
 /// <summary>
 /// Application - orchestrates the high-level flow
@@ -9,13 +9,13 @@ namespace ExpenseSplitter.Application;
 /// </summary>
 public class Application
 {
-    private readonly IPortal _portal;
+    private readonly IConsoleUI_Portal _consoleUiPortal;
     private readonly IProcessor _processor;
     private readonly IReportGenerator _reportGenerator;
 
-    public Application(IPortal portal, IProcessor processor, IReportGenerator reportGenerator)
+    public Application(IConsoleUI_Portal consoleUiPortal, IProcessor processor, IReportGenerator reportGenerator)
     {
-        _portal = portal;
+        _consoleUiPortal = consoleUiPortal;
         _processor = processor;
         _reportGenerator = reportGenerator;
     }
@@ -34,7 +34,7 @@ public class Application
             var report = _reportGenerator.GenerateReport(payments);
             
             // Display results
-            _portal.Print(payments);
+            _consoleUiPortal.Print(payments);
             
             Console.WriteLine();
             Console.WriteLine("=== DETAILED REPORT ===");

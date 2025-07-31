@@ -1,5 +1,5 @@
-using ExpenseSplitter.Core;
-using ExpenseSplitter.DataContracts;
+using ExpenseSplitter._03_ExpenseSplitter;
+using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
 using Xunit;
 
 namespace ExpenseSplitter.Tests;

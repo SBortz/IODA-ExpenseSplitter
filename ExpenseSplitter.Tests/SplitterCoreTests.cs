@@ -16,9 +16,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 100.0),
-            new Expense("Bob", 100.0),
-            new Expense("Charlie", 100.0)
+            new EurExpense("Alice", 100.0),
+            new EurExpense("Bob", 100.0),
+            new EurExpense("Charlie", 100.0)
         };
 
         // Act
@@ -34,10 +34,10 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 100.0),  // +37.50 (über Durchschnitt)
-            new Expense("Bob", 50.0),     // -12.50 (unter Durchschnitt)
-            new Expense("Charlie", 75.0), // +12.50 (über Durchschnitt)
-            new Expense("David", 25.0)    // -37.50 (unter Durchschnitt)
+            new EurExpense("Alice", 100.0),  // +37.50 (über Durchschnitt)
+            new EurExpense("Bob", 50.0),     // -12.50 (unter Durchschnitt)
+            new EurExpense("Charlie", 75.0), // +12.50 (über Durchschnitt)
+            new EurExpense("David", 25.0)    // -37.50 (unter Durchschnitt)
         };
 
         // Act
@@ -63,9 +63,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 300.0),  // Zahlt alles
-            new Expense("Bob", 0.0),      // Zahlt nichts
-            new Expense("Charlie", 0.0)   // Zahlt nichts
+            new EurExpense("Alice", 300.0),  // Zahlt alles
+            new EurExpense("Bob", 0.0),      // Zahlt nichts
+            new EurExpense("Charlie", 0.0)   // Zahlt nichts
         };
 
         // Act
@@ -89,9 +89,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 0.0),    // Zahlt nichts
-            new Expense("Bob", 0.0),      // Zahlt nichts
-            new Expense("Charlie", 300.0) // Zahlt alles
+            new EurExpense("Alice", 0.0),    // Zahlt nichts
+            new EurExpense("Bob", 0.0),      // Zahlt nichts
+            new EurExpense("Charlie", 300.0) // Zahlt alles
         };
 
         // Act
@@ -115,11 +115,11 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 150.0),   // +50 (über Durchschnitt)
-            new Expense("Bob", 80.0),      // -20 (unter Durchschnitt)
-            new Expense("Charlie", 120.0), // +20 (über Durchschnitt)
-            new Expense("David", 70.0),    // -30 (unter Durchschnitt)
-            new Expense("Eve", 100.0)      // 0 (genau Durchschnitt)
+            new EurExpense("Alice", 150.0),   // +50 (über Durchschnitt)
+            new EurExpense("Bob", 80.0),      // -20 (unter Durchschnitt)
+            new EurExpense("Charlie", 120.0), // +20 (über Durchschnitt)
+            new EurExpense("David", 70.0),    // -30 (unter Durchschnitt)
+            new EurExpense("Eve", 100.0)      // 0 (genau Durchschnitt)
         };
 
         // Act
@@ -147,7 +147,7 @@ public class ExpenseSplitterCoreTests
     public void Split_EmptyExpenses_ShouldReturnEmptyArray()
     {
         // Arrange
-        var expenses = new Expense[0];
+        var expenses = new EurExpense[0];
 
         // Act
         var result = ExpenseSplitter_Core.SplitExpenses(expenses);
@@ -160,7 +160,7 @@ public class ExpenseSplitterCoreTests
     public void Split_SingleExpense_ShouldReturnEmptyArray()
     {
         // Arrange
-        var expenses = new[] { new Expense("Alice", 100.0) };
+        var expenses = new[] { new EurExpense("Alice", 100.0) };
 
         // Act
         var result = ExpenseSplitter_Core.SplitExpenses(expenses);
@@ -175,9 +175,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 100.33),
-            new Expense("Bob", 50.67),
-            new Expense("Charlie", 75.00)
+            new EurExpense("Alice", 100.33),
+            new EurExpense("Bob", 50.67),
+            new EurExpense("Charlie", 75.00)
         };
 
         // Act
@@ -197,9 +197,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 1000000.0),
-            new Expense("Bob", 500000.0),
-            new Expense("Charlie", 750000.0)
+            new EurExpense("Alice", 1000000.0),
+            new EurExpense("Bob", 500000.0),
+            new EurExpense("Charlie", 750000.0)
         };
 
         // Act
@@ -221,9 +221,9 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", -100.0),
-            new Expense("Bob", 200.0),
-            new Expense("Charlie", 50.0)
+            new EurExpense("Alice", -100.0),
+            new EurExpense("Bob", 200.0),
+            new EurExpense("Charlie", 50.0)
         };
 
         // Act
@@ -245,10 +245,10 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 100.0),
-            new Expense("Bob", 100.0),
-            new Expense("Charlie", 100.0),
-            new Expense("David", 200.0) // Zahlt 100€ mehr
+            new EurExpense("Alice", 100.0),
+            new EurExpense("Bob", 100.0),
+            new EurExpense("Charlie", 100.0),
+            new EurExpense("David", 200.0) // Zahlt 100€ mehr
         };
 
         // Act
@@ -274,11 +274,11 @@ public class ExpenseSplitterCoreTests
         // Arrange
         var expenses = new[]
         {
-            new Expense("Alice", 150.0),
-            new Expense("Bob", 80.0),
-            new Expense("Charlie", 120.0),
-            new Expense("David", 70.0),
-            new Expense("Eve", 100.0)
+            new EurExpense("Alice", 150.0),
+            new EurExpense("Bob", 80.0),
+            new EurExpense("Charlie", 120.0),
+            new EurExpense("David", 70.0),
+            new EurExpense("Eve", 100.0)
         };
 
         // Act

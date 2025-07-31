@@ -15,9 +15,9 @@ public static class CurrencyConverter_Core
     /// <param name="currencyExpenses">Expenses with currency information</param>
     /// <param name="exchangeRateProvider">Provider for exchange rates</param>
     /// <returns>Expenses converted to EUR</returns>
-    public static Expense[] ConvertToEur(CurrencyExpense[] currencyExpenses, ICurrencyConverter_Provider exchangeRateProvider)
+    public static EurExpense[] ConvertToEur(Expense[] currencyExpenses, ICurrencyConverter_Provider exchangeRateProvider)
     {
-        var convertedExpenses = new List<Expense>();
+        var convertedExpenses = new List<EurExpense>();
         
         foreach (var currencyExpense in currencyExpenses)
         {
@@ -35,7 +35,7 @@ public static class CurrencyConverter_Core
                 convertedAmount = currencyExpense.amount * exchangeRate.rate;
             }
             
-            convertedExpenses.Add(new Expense(currencyExpense.name, convertedAmount));
+            convertedExpenses.Add(new EurExpense(currencyExpense.name, convertedAmount));
         }
         
         return convertedExpenses.ToArray();

@@ -11,7 +11,7 @@ public static class ExpenseSplitter_Core
     /// <summary>
     /// Split expenses among people and calculate who pays/receives what
     /// </summary>
-    public static Payment[] SplitExpenses(Expense[] expenses)
+    public static Payment[] SplitExpenses(EurExpense[] expenses)
     {
         // Handle empty or single expense arrays
         if (expenses.Length <= 1)

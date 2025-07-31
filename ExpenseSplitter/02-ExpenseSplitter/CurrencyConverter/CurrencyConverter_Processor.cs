@@ -21,7 +21,7 @@ public class CurrencyConverter_Processor : ICurrencyConverter_Processor
     /// </summary>
     /// <param name="currencyExpenses">Expenses with currency information</param>
     /// <returns>Expenses converted to EUR</returns>
-    public Expense[] ConvertToEur(CurrencyExpense[] currencyExpenses)
+    public EurExpense[] ConvertToEur(Expense[] currencyExpenses)
     {
         return CurrencyConverter_Core.ConvertToEur(currencyExpenses, _exchangeRateProvider);
     }

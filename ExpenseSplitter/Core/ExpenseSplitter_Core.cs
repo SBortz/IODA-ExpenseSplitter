@@ -4,12 +4,12 @@ namespace ExpenseSplitter.Core;
 /// Core business logic for splitting expenses
 /// Contains pure domain logic without any external dependencies
 /// </summary>
-public static class Splitter_Core
+public static class ExpenseSplitter_Core
 {
     /// <summary>
     /// Split expenses among people and calculate who pays/receives what
     /// </summary>
-    public static Payment[] Split(Expense[] expenses)
+    public static Payment[] SplitExpenses(Expense[] expenses)
     {
         // Handle empty or single expense arrays
         if (expenses.Length <= 1)

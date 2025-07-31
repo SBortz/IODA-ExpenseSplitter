@@ -5,7 +5,7 @@ namespace ExpenseSplitter.Portals;
 /// <summary>
 /// Console UI - handles user interaction and display
 /// </summary>
-public class UI : IPortal
+public class ConsoleUI_Portal : IPortal
 {
     /// <summary>
     /// Print payments to console

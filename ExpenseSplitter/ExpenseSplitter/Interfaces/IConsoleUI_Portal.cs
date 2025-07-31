@@ -1,7 +1,7 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._99_IODA_BuildingBlocks;
+using ExpenseSplitter.BuildingBlocks;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 
-namespace ExpenseSplitter._02_ExpenseSplitter.Interfaces;
+namespace ExpenseSplitter.ExpenseSplitter.Interfaces;
 
 public interface IConsoleUI_Portal : IPortal
 {

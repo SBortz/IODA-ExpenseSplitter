@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._99_IODA_BuildingBlocks;
+namespace ExpenseSplitter.BuildingBlocks;
 
 /// <summary>
 /// Provider interface for loading expenses

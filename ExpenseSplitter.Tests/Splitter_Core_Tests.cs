@@ -1,5 +1,5 @@
-using ExpenseSplitter._02_ExpenseSplitter;
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 using Xunit;
 
 namespace ExpenseSplitter.Tests;
@@ -8,7 +8,7 @@ namespace ExpenseSplitter.Tests;
 /// Tests for the ExpenseSplitter_Core functional core
 /// Demonstrates how easy it is to test pure business logic without external dependencies
 /// </summary>
-public class ExpenseSplitterCoreTests
+public class ExpenseSplitter_Core_Tests
 {
     [Fact]
     public void Split_EqualExpenses_ShouldReturnEmptyArray()

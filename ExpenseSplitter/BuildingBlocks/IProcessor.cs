@@ -1,6 +1,6 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 
-namespace ExpenseSplitter._99_IODA_BuildingBlocks;
+namespace ExpenseSplitter.BuildingBlocks;
 
 /// <summary>
 /// Processor interface for business logic orchestration

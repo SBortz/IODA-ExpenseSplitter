@@ -1,8 +1,7 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter._02_ExpenseSplitter;
+namespace ExpenseSplitter.ExpenseSplitter;
 
 /// <summary>
 /// Expense repository - loads expenses from file

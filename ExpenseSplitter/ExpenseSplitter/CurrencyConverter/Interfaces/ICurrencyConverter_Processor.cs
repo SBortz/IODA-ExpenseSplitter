@@ -1,7 +1,7 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces;
 
 /// <summary>
 /// Currency converter processor interface for business logic orchestration

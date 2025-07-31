@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._99_IODA_BuildingBlocks;
+namespace ExpenseSplitter.BuildingBlocks;
 
 /// <summary>
 /// Portal interface for user interaction and output

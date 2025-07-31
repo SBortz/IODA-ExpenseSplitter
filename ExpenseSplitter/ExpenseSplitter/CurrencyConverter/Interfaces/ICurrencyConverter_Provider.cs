@@ -1,6 +1,6 @@
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
 
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces;
 
 /// <summary>
 /// Currency converter provider interface for external exchange rate API

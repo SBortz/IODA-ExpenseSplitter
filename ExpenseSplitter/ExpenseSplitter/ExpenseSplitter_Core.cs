@@ -1,6 +1,6 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 
-namespace ExpenseSplitter._02_ExpenseSplitter;
+namespace ExpenseSplitter.ExpenseSplitter;
 
 /// <summary>
 /// Core business logic for splitting expenses

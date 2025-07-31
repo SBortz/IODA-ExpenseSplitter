@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+namespace ExpenseSplitter.ExpenseSplitter.DataContracts;
 
 /// <summary>
 /// Expense record - represents an expense with name and amount

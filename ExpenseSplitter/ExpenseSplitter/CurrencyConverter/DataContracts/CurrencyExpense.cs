@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
 
 /// <summary>
 /// Currency expense record - represents an expense with name, amount and currency

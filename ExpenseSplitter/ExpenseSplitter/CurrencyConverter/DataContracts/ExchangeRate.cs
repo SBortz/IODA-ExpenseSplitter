@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
 
 /// <summary>
 /// Exchange rate record - represents exchange rate data

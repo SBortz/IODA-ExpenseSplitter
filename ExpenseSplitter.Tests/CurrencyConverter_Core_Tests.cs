@@ -1,5 +1,5 @@
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
 using Xunit;
 
 namespace ExpenseSplitter.Tests;

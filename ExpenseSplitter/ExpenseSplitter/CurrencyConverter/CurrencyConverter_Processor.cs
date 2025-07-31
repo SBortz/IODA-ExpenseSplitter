@@ -1,8 +1,8 @@
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
 
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter;
 
 /// <summary>
 /// Currency converter processor - orchestrates currency conversion business logic

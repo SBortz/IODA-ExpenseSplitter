@@ -1,7 +1,7 @@
-using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
-using ExpenseSplitter._99_IODA_BuildingBlocks;
+using ExpenseSplitter.BuildingBlocks;
+using ExpenseSplitter.ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter._01_Application;
+namespace ExpenseSplitter;
 
 public class Application
 {

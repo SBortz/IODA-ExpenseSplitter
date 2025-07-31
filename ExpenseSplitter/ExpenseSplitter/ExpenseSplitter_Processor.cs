@@ -1,10 +1,9 @@
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
-using ExpenseSplitter._99_IODA_BuildingBlocks;
+using ExpenseSplitter.BuildingBlocks;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces;
+using ExpenseSplitter.ExpenseSplitter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter._02_ExpenseSplitter;
+namespace ExpenseSplitter.ExpenseSplitter;
 
 public class ExpenseSplitter_Processor : IProcessor
 {

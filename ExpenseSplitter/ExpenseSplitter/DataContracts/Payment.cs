@@ -1,4 +1,4 @@
-namespace ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+namespace ExpenseSplitter.ExpenseSplitter.DataContracts;
 
 /// <summary>
 /// Payment record - represents a payment between people

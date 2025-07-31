@@ -1,7 +1,7 @@
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces;
 
-namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter;
+namespace ExpenseSplitter.ExpenseSplitter.CurrencyConverter;
 
 /// <summary>
 /// Mock currency converter provider - simulates external exchange rate API

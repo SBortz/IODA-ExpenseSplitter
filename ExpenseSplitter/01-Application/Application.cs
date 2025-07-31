@@ -3,10 +3,6 @@ using ExpenseSplitter._99_IODA_BuildingBlocks;
 
 namespace ExpenseSplitter._01_Application;
 
-/// <summary>
-/// Application - orchestrates the high-level flow
-/// Top layer cell that coordinates middle layer cells
-/// </summary>
 public class Application
 {
     private readonly IConsoleUI_Portal _consoleUiPortal;
@@ -20,22 +16,15 @@ public class Application
         _reportGenerator = reportGenerator;
     }
 
-    /// <summary>
-    /// Run the application - get payments, generate report, and display them
-    /// </summary>
     public void Run()
     {
         try
         {
-            // Process expenses and get payments
             var payments = _processor.SplitCosts();
             
-            // Generate detailed report
-            var report = _reportGenerator.GenerateReport(payments);
-            
-            // Display results
             _consoleUiPortal.Print(payments);
             
+            var report = _reportGenerator.GenerateReport(payments);
             Console.WriteLine();
             Console.WriteLine("=== DETAILED REPORT ===");
             Console.WriteLine(report);

@@ -9,7 +9,7 @@ Console.WriteLine();
 
 // Construction - wire up dependencies in 3-layer hierarchy
 // Bottom Layer (3 cells): FileExpenseProvider, ConsoleUI_Portal, ValidationEngine_Core
-var fileProvider = new FileExpenseProvider();
+var fileProvider = new FileExpenseExpenseProvider();
 var consoleUI = new ConsoleUI_Portal();
 
 // Middle Layer (2 cells): ExpenseProcessor_Processor, ReportGenerator_Portal

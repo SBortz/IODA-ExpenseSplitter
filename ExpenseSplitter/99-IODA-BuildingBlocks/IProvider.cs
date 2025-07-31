@@ -1,5 +1,3 @@
-using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
-
 namespace ExpenseSplitter._99_IODA_BuildingBlocks;
 
 /// <summary>
@@ -7,8 +5,4 @@ namespace ExpenseSplitter._99_IODA_BuildingBlocks;
 /// </summary>
 public interface IProvider
 {
-    /// <summary>
-    /// Load expenses from data source
-    /// </summary>
-    Expense[] Load();
-} 
+}

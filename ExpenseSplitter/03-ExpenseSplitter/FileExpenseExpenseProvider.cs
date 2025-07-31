@@ -6,7 +6,7 @@ namespace ExpenseSplitter._03_ExpenseSplitter;
 /// <summary>
 /// Expense repository - loads expenses from file
 /// </summary>
-public class FileExpenseProvider : IProvider
+public class FileExpenseExpenseProvider : IFileExpense_Provider
 {
     /// <summary>
     /// Load expenses from expenses.txt file

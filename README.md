@@ -1,90 +1,154 @@
-# IODA Architecture Example - Expense Splitter
+# CurrencyConverter - IODA-Architektur mit funktionaler Reinheit
 
-Dieses Projekt demonstriert die IODA-Architektur (Integration Operation Segregation Architecture) anhand eines einfachen Ausgaben-Splitters, wie in dem Artikel von Ralf Westphal beschrieben.
+## 🎯 Übersicht
 
-## Was ist IODA?
+Die CurrencyConverter-Software-Zelle implementiert Währungskonvertierung nach dem IODA-Prinzip mit funktionaler Reinheit des Core-Bausteins.
 
-IODA ist ein Architekturmuster, das Anliegen in folgende Bereiche trennt:
-- **Core**: Enthält die Domänenlogik und Geschäftsregeln
-- **Portals**: Behandeln Benutzerinteraktion und Ein-/Ausgabe
-- **Providers**: Verwalten externe Ressourcen und Datenzugriff
-- **Integrations**: Koordinieren zwischen Core, Portals und Providers
-
-## Schlüsselprinzipien
-
-1. **Integration Operation Segregation Principle (IOSP)**: Trennt Funktionen, die Logik enthalten, von denen, die keine enthalten
-2. **Keine funktionalen Abhängigkeiten**: Core-Module hängen nicht von Implementierungsdetails ab
-3. **Rekursive Struktur**: Jede Komponente kann weiter in IODA-Komponenten zerlegt werden
-4. **Sleepy Hollow Architecture**: Trennt "Kopf" (Construction/Application) vom "Körper" (Processor)
-
-## Projektstruktur
+## 🏗️ Projektstruktur
 
 ```
-ExpenseSplitter/
-├── Core/                    # Domänenlogik (schwarzer Kreis)
-│   ├── Payment.cs
-│   ├── Expense.cs
-│   └── Splitter_Core.cs
-├── Providers/               # Externe Ressourcen (grünes Dreieck)
-│   ├── IProvider.cs
-│   └── ExpenseRepository.cs
-├── Portals/                 # Benutzerinteraktion (blaues Quadrat)
-│   ├── IPortal.cs
-│   └── UI.cs
-├── Processors/              # Koordinationslogik (mittlerer Abschnitt)
-│   ├── IProcessor.cs
-│   └── Processor.cs
-├── Application/             # High-Level-Flow (zweiter Abschnitt)
-│   └── Application.cs
-├── Program.cs               # Construction (oberster Abschnitt)
-└── expenses.txt             # Beispieldaten
+IODA-ExpenseSplitter/
+├── ExpenseSplitter/
+│   ├── BuildingBlocks/
+│   │   ├── IProcessor.cs
+│   │   ├── IPortal.cs
+│   │   └── IProvider.cs
+│   ├── ExpenseSplitter/
+│   │   ├── CurrencyConverter/
+│   │   │   ├── DataContracts/
+│   │   │   │   ├── CurrencyExpense.cs
+│   │   │   │   └── ExchangeRate.cs
+│   │   │   ├── Interfaces/
+│   │   │   │   ├── ICurrencyConverter_Provider.cs
+│   │   │   │   └── ICurrencyConverter_Processor.cs
+│   │   │   ├── CurrencyConverter_Core.cs
+│   │   │   ├── CurrencyConverter_Processor.cs
+│   │   │   └── CurrencyConverter_Provider.cs
+│   │   ├── DataContracts/
+│   │   ├── Interfaces/
+│   │   └── ...
+│   ├── Application.cs
+│   └── Program.cs
+└── ExpenseSplitter.Tests/
+    └── CurrencyConverter_Core_Tests.cs
 ```
 
-## IODA-Flow
+## 🏗️ Architektur
 
-1. **Construction** (`Program.cs`): Dependencies werden zusammengefügt
-2. **Application** (`Application.cs`): High-Level-Flow orchestriert
-3. **Processor** (`Processor.cs`): Integriert Core-Logik mit Provider
-4. **Portal** (`UI.cs`): Benutzerinteraktion und Ausgabe
-5. **Core** (`Splitter_Core.cs`): Reine Domänenlogik
-6. **Provider** (`ExpenseRepository.cs`): Datenzugriff abstrahiert
+```
+CurrencyConverter_Processor (Orchestrierung)
+    ↓
+CurrencyConverter_Core (Funktional pur)
+    ↑
+CurrencyConverter_Provider (Datenbeschaffung + Seiteneffekte)
+```
 
-## Ausführen des Beispiels
+## 📁 Namespaces
 
-### Voraussetzungen
-- .NET 8.0 SDK
+- **BuildingBlocks**: `ExpenseSplitter.BuildingBlocks`
+- **CurrencyConverter**: `ExpenseSplitter.ExpenseSplitter.CurrencyConverter`
+- **DataContracts**: `ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts`
+- **Interfaces**: `ExpenseSplitter.ExpenseSplitter.CurrencyConverter.Interfaces`
+- **Tests**: `ExpenseSplitter.Tests`
 
-### Build und Run
+## ✅ Funktionale Reinheit
+
+### Core-Baustein (Funktional pur)
+```csharp
+public static EurExpense[] ConvertToEur(CurrencyExpense[] currencyExpenses, Dictionary<string, double> exchangeRates)
+{
+    // ✅ Keine externen Aufrufe
+    // ✅ Keine Seiteneffekte
+    // ✅ Deterministisch
+    // ✅ Nur lokale Berechnungen
+}
+```
+
+### Provider (Seiteneffekte isoliert)
+```csharp
+public Dictionary<string, double> GetExchangeRatesForExpenses(CurrencyExpense[] currencyExpenses)
+{
+    // Extrahiert eindeutige Währungen und holt Wechselkurse
+    // ⚠️ Seiteneffekte: API-Aufrufe, Thread.Sleep()
+}
+```
+
+### Processor (Orchestrierung)
+```csharp
+public EurExpense[] ConvertToEur(CurrencyExpense[] currencyExpenses)
+{
+    // 1. Hole Wechselkurse vom Provider (Seiteneffekte)
+    var exchangeRates = _exchangeRateProvider.GetExchangeRatesForExpenses(currencyExpenses);
+    
+    // 2. Rufe funktional reinen Core auf
+    return CurrencyConverter_Core.ConvertToEur(currencyExpenses, exchangeRates);
+}
+```
+
+## 🧪 Tests
+
+Tests befinden sich im `ExpenseSplitter.Tests`-Projekt:
+
+```csharp
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter;
+using ExpenseSplitter.ExpenseSplitter.CurrencyConverter.DataContracts;
+using Xunit;
+
+namespace ExpenseSplitter.Tests;
+
+public class CurrencyConverter_Core_Tests
+{
+    [Fact]
+    public void DemonstrateFunctionalPurity()
+    {
+        // Test der funktionalen Reinheit
+    }
+}
+```
+
+### Test-Kategorien:
+- **Funktionale Reinheit**: Nachweis der Deterministik und fehlender Seiteneffekte
+- **EUR-Konvertierung**: Test dass EUR-Ausgaben nicht konvertiert werden
+- **Unbekannte Währungen**: Test des Default-Verhaltens
+- **Null-Eingaben**: Test der Robustheit
+
+## 🎯 IODA-Prinzip eingehalten
+
+- **Core**: Funktional pur, enthält nur Geschäftslogik
+- **Processor**: Orchestriert Core und Provider
+- **Provider**: Handhabt Datenbeschaffung und externe Abhängigkeiten
+- **Interfaces**: Definieren klare Verträge
+- **DataContracts**: Immutable Datenstrukturen
+
+## 🚀 Verwendung
+
+```csharp
+// Dependency Injection
+var currencyConverterProvider = new CurrencyConverter_Provider();
+var currencyConverterProcessor = new CurrencyConverter_Processor(currencyConverterProvider);
+
+// Verwendung
+var currencyExpenses = fileProvider.LoadExpenses();
+var eurExpenses = currencyConverterProcessor.ConvertToEur(currencyExpenses);
+```
+
+## 📊 Unterstützte Währungen
+
+- **USD**: 1 USD = 0.85 EUR
+- **GBP**: 1 GBP = 1.18 EUR
+- **CHF**: 1 CHF = 0.92 EUR
+- **JPY**: 1 JPY = 0.007 EUR
+- **EUR**: Keine Konvertierung nötig
+- **Unbekannte Währungen**: Default zu 1.0 (keine Konvertierung)
+
+## 🔧 Ausführung
+
 ```bash
+# Tests ausführen
+cd ExpenseSplitter.Tests
+dotnet test
+
+# Anwendung ausführen
 cd ExpenseSplitter
-dotnet build
 dotnet run
-```
-
-### Erwartete Ausgabe
-```
-Alice receives 37.50
-Bob pays 12.50
-Charlie receives 12.50
-David pays 37.50
-```
-
-## Architekturvorteile
-
-Die IODA-Architektur demonstriert mehrere Schlüsselvorteile:
-
-1. **Testbarkeit**: Jede Komponente kann isoliert getestet werden
-2. **Wartbarkeit**: Klare Trennung der Anliegen
-3. **Flexibilität**: Einfacher Austausch von Implementierungen
-4. **Keine funktionalen Abhängigkeiten**: Core-Logik ist unabhängig von externen Anliegen
-
-## Wie es funktioniert
-
-1. **Construction**: `Program.cs` erstellt die Anwendung mit allen Dependencies
-2. **Application**: `Application.Run()` startet den High-Level-Flow
-3. **Processor**: `Processor.SplitCosts()` lädt Daten und wendet Core-Logik an
-4. **Provider**: `ExpenseRepository.Load()` liest Ausgaben aus der Datei
-5. **Core**: `Splitter_Core.Split()` berechnet die Aufteilung
-6. **Portal**: `UI.Print()` zeigt die Ergebnisse an
-
-Dieses Beispiel zeigt, wie IODA die Trennung von Anliegen ermöglicht und funktionale Abhängigkeiten eliminiert, was zu einer saubereren, testbareren und wartbareren Architektur führt. 
+``` 

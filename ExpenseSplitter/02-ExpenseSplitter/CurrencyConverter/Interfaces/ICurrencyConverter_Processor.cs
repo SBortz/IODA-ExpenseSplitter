@@ -13,5 +13,5 @@ public interface ICurrencyConverter_Processor
     /// </summary>
     /// <param name="currencyExpenses">Expenses with currency information</param>
     /// <returns>Expenses converted to EUR</returns>
-    EurExpense[] ConvertToEur(Expense[] currencyExpenses);
+    EurExpense[] ConvertToEur(CurrencyExpense[] currencyExpenses);
 } 

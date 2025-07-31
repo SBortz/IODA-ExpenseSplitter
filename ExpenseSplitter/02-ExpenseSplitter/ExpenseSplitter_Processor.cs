@@ -20,8 +20,8 @@ public class ExpenseSplitter_Processor : IProcessor
     public Payment[] SplitCosts()
     {
         // Load currency expenses and convert to EUR
-        Expense[] expenses = _repo.LoadExpenses();
-        EurExpense[] expensesEuro = _currencyConverter.ConvertToEur(expenses);
+        var currencyExpenses = _repo.LoadExpenses();
+        var expensesEuro = _currencyConverter.ConvertToEur(currencyExpenses);
         
         return ExpenseSplitter_Core.SplitExpenses(expensesEuro);
     }

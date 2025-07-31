@@ -9,5 +9,5 @@ public interface IFileExpense_Provider : IProvider
     /// <summary>
     /// Load currency expenses from data source (with currency column)
     /// </summary>
-    Expense[] LoadExpenses();
+    CurrencyExpense[] LoadExpenses();
 }

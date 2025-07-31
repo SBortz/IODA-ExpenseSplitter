@@ -1,43 +1,51 @@
 using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
 using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
-using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.Interfaces;
 
 namespace ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter;
 
 /// <summary>
-/// Currency converter core - contains business logic for currency conversion
+/// Currency converter core - contains pure functional business logic for currency conversion
 /// </summary>
 public static class CurrencyConverter_Core
 {
     /// <summary>
-    /// Convert currency expenses to EUR using exchange rate provider
+    /// Convert currency expenses to EUR using provided exchange rates
+    /// Pure function - no side effects, deterministic
     /// </summary>
     /// <param name="currencyExpenses">Expenses with currency information</param>
-    /// <param name="exchangeRateProvider">Provider for exchange rates</param>
+    /// <param name="exchangeRates">Dictionary of exchange rates (currency -> EUR rate)</param>
     /// <returns>Expenses converted to EUR</returns>
-    public static EurExpense[] ConvertToEur(Expense[] currencyExpenses, ICurrencyConverter_Provider exchangeRateProvider)
+    public static EurExpense[] ConvertToEur(CurrencyExpense[] currencyExpenses, Dictionary<string, double> exchangeRates)
     {
-        var convertedExpenses = new List<EurExpense>();
+        if (currencyExpenses == null || exchangeRates == null)
+            return Array.Empty<EurExpense>();
+            
+        return currencyExpenses
+            .Select(expense => ConvertSingleExpense(expense, exchangeRates))
+            .ToArray();
+    }
+    
+    /// <summary>
+    /// Convert a single expense to EUR
+    /// Pure function - no side effects, deterministic
+    /// </summary>
+    /// <param name="expense">Expense to convert</param>
+    /// <param name="exchangeRates">Dictionary of exchange rates</param>
+    /// <returns>Converted expense in EUR</returns>
+    private static EurExpense ConvertSingleExpense(CurrencyExpense expense, Dictionary<string, double> exchangeRates)
+    {
+        var currency = expense.currency.ToUpperInvariant();
         
-        foreach (var currencyExpense in currencyExpenses)
+        // If already EUR, no conversion needed
+        if (currency == "EUR")
         {
-            double convertedAmount;
-            
-            if (currencyExpense.currency.ToUpper() == "EUR")
-            {
-                // Already in EUR, no conversion needed
-                convertedAmount = currencyExpense.amount;
-            }
-            else
-            {
-                // Convert to EUR using exchange rate
-                var exchangeRate = exchangeRateProvider.GetExchangeRate(currencyExpense.currency, "EUR");
-                convertedAmount = currencyExpense.amount * exchangeRate.rate;
-            }
-            
-            convertedExpenses.Add(new EurExpense(currencyExpense.name, convertedAmount));
+            return new EurExpense(expense.name, expense.amount);
         }
         
-        return convertedExpenses.ToArray();
+        // Get exchange rate, default to 1.0 if not found
+        var rate = exchangeRates.GetValueOrDefault(currency, 1.0);
+        var convertedAmount = expense.amount * rate;
+        
+        return new EurExpense(expense.name, convertedAmount);
     }
 } 

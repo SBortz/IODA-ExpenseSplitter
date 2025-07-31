@@ -12,11 +12,11 @@ public class FileExpens_Provider : IFileExpense_Provider
     /// <summary>
     /// Load currency expenses from expenses.txt file (with currency column)
     /// </summary>
-    public Expense[] LoadExpenses()
+    public CurrencyExpense[] LoadExpenses()
     {
         return System.IO.File.ReadAllLines("expenses.txt")
             .Select(x => x.Split(','))
-            .Select(x => new Expense(x[0], double.Parse(x[1]), x[2]))
+            .Select(x => new CurrencyExpense(x[0], double.Parse(x[1]), x[2]))
             .ToArray();
     }
 } 

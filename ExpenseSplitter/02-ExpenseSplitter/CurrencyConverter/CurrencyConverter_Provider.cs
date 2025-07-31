@@ -45,4 +45,30 @@ public class CurrencyConverter_Provider : ICurrencyConverter_Provider
         
         return new ExchangeRate(fromUpper, toUpper, crossRate);
     }
+    
+    /// <summary>
+    /// Get all required exchange rates for converting expenses to EUR
+    /// </summary>
+    /// <param name="currencyExpenses">Expenses to get exchange rates for</param>
+    /// <returns>Dictionary of currency codes to EUR exchange rates</returns>
+    public Dictionary<string, double> GetExchangeRatesForExpenses(CurrencyExpense[] currencyExpenses)
+    {
+        var exchangeRates = new Dictionary<string, double>();
+        
+        // Extract unique currencies from expenses
+        var uniqueCurrencies = currencyExpenses
+            .Select(e => e.currency.ToUpperInvariant())
+            .Distinct();
+        
+        foreach (var currency in uniqueCurrencies)
+        {
+            if (currency != "EUR") // EUR doesn't need conversion
+            {
+                var rate = GetExchangeRate(currency, "EUR");
+                exchangeRates[currency] = rate.rate;
+            }
+        }
+        
+        return exchangeRates;
+    }
 } 

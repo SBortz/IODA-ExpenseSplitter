@@ -21,8 +21,12 @@ public class CurrencyConverter_Processor : ICurrencyConverter_Processor
     /// </summary>
     /// <param name="currencyExpenses">Expenses with currency information</param>
     /// <returns>Expenses converted to EUR</returns>
-    public EurExpense[] ConvertToEur(Expense[] currencyExpenses)
+    public EurExpense[] ConvertToEur(CurrencyExpense[] currencyExpenses)
     {
-        return CurrencyConverter_Core.ConvertToEur(currencyExpenses, _exchangeRateProvider);
+        // Get all required exchange rates from provider (side effects happen here)
+        var exchangeRates = _exchangeRateProvider.GetExchangeRatesForExpenses(currencyExpenses);
+        
+        // Call pure functional core with exchange rates
+        return CurrencyConverter_Core.ConvertToEur(currencyExpenses, exchangeRates);
     }
 } 

@@ -1,4 +1,5 @@
 using ExpenseSplitter.Core;
+using ExpenseSplitter.DataContracts;
 using ExpenseSplitter.Providers;
 
 namespace ExpenseSplitter.Processors;

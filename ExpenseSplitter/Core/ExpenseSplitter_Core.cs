@@ -1,3 +1,5 @@
+using ExpenseSplitter.DataContracts;
+
 namespace ExpenseSplitter.Core;
 
 /// <summary>

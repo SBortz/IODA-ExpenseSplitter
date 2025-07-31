@@ -1,19 +1,20 @@
+using ExpenseSplitter.DataContracts;
 using ExpenseSplitter.Providers;
 using Xunit;
 
 namespace ExpenseSplitter.Tests;
 
 /// <summary>
-/// Tests for the Provider component
+/// Tests for the FileExpenseProvider component
 /// Demonstrates testing data access layer
 /// </summary>
-public class ProviderTests
+public class FileExpenseProviderTests
 {
     [Fact]
     public void Load_WithValidFile_ShouldReturnCorrectExpenses()
     {
         // Arrange
-        var provider = new ExpenseRepository();
+        var provider = new FileExpenseProvider();
 
         // Act
         var result = provider.Load();
@@ -36,7 +37,7 @@ public class ProviderTests
     public void Load_WithValidFile_ShouldParseDecimalValuesCorrectly()
     {
         // Arrange
-        var provider = new ExpenseRepository();
+        var provider = new FileExpenseProvider();
 
         // Act
         var result = provider.Load();
@@ -53,7 +54,7 @@ public class ProviderTests
     public void Load_WithValidFile_ShouldHaveCorrectTotalAmount()
     {
         // Arrange
-        var provider = new ExpenseRepository();
+        var provider = new FileExpenseProvider();
 
         // Act
         var result = provider.Load();

@@ -1,5 +1,6 @@
 using ExpenseSplitter.Application;
 using ExpenseSplitter.Core;
+using ExpenseSplitter.DataContracts;
 using ExpenseSplitter.Portals;
 using ExpenseSplitter.Processors;
 using Xunit;
@@ -7,10 +8,10 @@ using Xunit;
 namespace ExpenseSplitter.Tests;
 
 /// <summary>
-/// Tests for the Application component
+/// Tests for the ExpenseSplitterApplication_Application component
 /// Demonstrates testing the high-level flow
 /// </summary>
-public class ApplicationTests
+public class ExpenseSplitterApplicationTests
 {
     [Fact]
     public void Run_WithMockComponents_ShouldCallPortalWithCorrectPayments()
@@ -18,7 +19,7 @@ public class ApplicationTests
         // Arrange
         var mockPortal = new MockPortal();
         var mockProcessor = new MockProcessor();
-        var application = new ExpenseSplitter.Application.Application(mockPortal, mockProcessor);
+        var application = new ExpenseSplitter.Application.Application(mockPortal, mockProcessor, new ReportGenerator_Portal());
 
         // Act
         application.Run();
@@ -44,7 +45,7 @@ public class ApplicationTests
         // Arrange
         var mockPortal = new MockPortal();
         var emptyProcessor = new EmptyProcessor();
-        var application = new ExpenseSplitter.Application.Application(mockPortal, emptyProcessor);
+        var application = new ExpenseSplitter.Application.Application(mockPortal, emptyProcessor, new ReportGenerator_Portal());
 
         // Act
         application.Run();

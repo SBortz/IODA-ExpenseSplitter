@@ -1,4 +1,5 @@
 using ExpenseSplitter.Core;
+using ExpenseSplitter.DataContracts;
 using ExpenseSplitter.Processors;
 using ExpenseSplitter.Providers;
 using Xunit;
@@ -6,17 +7,17 @@ using Xunit;
 namespace ExpenseSplitter.Tests;
 
 /// <summary>
-/// Tests for the Processor component
+/// Tests for the ExpenseProcessor_Processor component
 /// Demonstrates integration testing with mocked providers
 /// </summary>
-public class ProcessorTests
+public class ExpenseProcessorTests
 {
     [Fact]
     public void SplitCosts_WithMockProvider_ShouldReturnCorrectPayments()
     {
         // Arrange
         var mockProvider = new MockExpenseProvider();
-        var processor = new Processor(mockProvider);
+        var processor = new ExpenseProcessor_Processor(mockProvider, new ValidationEngine_Core());
 
         // Act
         var result = processor.SplitCosts();
@@ -36,69 +37,26 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void SplitCosts_WithEmptyProvider_ShouldReturnEmptyArray()
+    public void SplitCosts_WithEmptyProvider_ShouldThrowValidationException()
     {
         // Arrange
         var emptyProvider = new EmptyExpenseProvider();
-        var processor = new Processor(emptyProvider);
+        var processor = new ExpenseProcessor_Processor(emptyProvider, new ValidationEngine_Core());
 
-        // Act
-        var result = processor.SplitCosts();
-
-        // Assert
-        Assert.Empty(result);
+        // Act & Assert
+        var exception = Assert.Throws<InvalidOperationException>(() => processor.SplitCosts());
+        Assert.Contains("No expenses provided", exception.Message);
     }
 
     [Fact]
-    public void SplitCosts_WithSingleExpenseProvider_ShouldReturnEmptyArray()
+    public void SplitCosts_WithSingleExpenseProvider_ShouldThrowValidationException()
     {
         // Arrange
         var singleProvider = new SingleExpenseProvider();
-        var processor = new Processor(singleProvider);
+        var processor = new ExpenseProcessor_Processor(singleProvider, new ValidationEngine_Core());
 
-        // Act
-        var result = processor.SplitCosts();
-
-        // Assert
-        Assert.Empty(result);
-    }
-}
-
-/// <summary>
-/// Mock provider for testing - returns the same data as expenses.txt
-/// </summary>
-public class MockExpenseProvider : IProvider
-{
-    public Expense[] Load()
-    {
-        return new[]
-        {
-            new Expense("Alice", 100.0),
-            new Expense("Bob", 50.0),
-            new Expense("Charlie", 75.0),
-            new Expense("David", 25.0)
-        };
-    }
-}
-
-/// <summary>
-/// Mock provider that returns empty array
-/// </summary>
-public class EmptyExpenseProvider : IProvider
-{
-    public Expense[] Load()
-    {
-        return new Expense[0];
-    }
-}
-
-/// <summary>
-/// Mock provider that returns single expense
-/// </summary>
-public class SingleExpenseProvider : IProvider
-{
-    public Expense[] Load()
-    {
-        return new[] { new Expense("Alice", 100.0) };
+        // Act & Assert
+        var exception = Assert.Throws<InvalidOperationException>(() => processor.SplitCosts());
+        Assert.Contains("At least 2 expenses are required for splitting", exception.Message);
     }
 } 

@@ -7,13 +7,13 @@ namespace ExpenseSplitter.Application;
 /// Application - orchestrates the high-level flow
 /// Top layer cell that coordinates middle layer cells
 /// </summary>
-public class ExpenseSplitterApplication_Application
+public class Application
 {
     private readonly IPortal _portal;
     private readonly IProcessor _processor;
     private readonly IReportGenerator _reportGenerator;
 
-    public ExpenseSplitterApplication_Application(IPortal portal, IProcessor processor, IReportGenerator reportGenerator)
+    public Application(IPortal portal, IProcessor processor, IReportGenerator reportGenerator)
     {
         _portal = portal;
         _processor = processor;

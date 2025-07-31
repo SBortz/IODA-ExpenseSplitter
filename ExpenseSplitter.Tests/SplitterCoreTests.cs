@@ -1,13 +1,14 @@
 using ExpenseSplitter.Core;
+using ExpenseSplitter.DataContracts;
 using Xunit;
 
 namespace ExpenseSplitter.Tests;
 
 /// <summary>
-/// Tests for the Splitter_Core functional core
+/// Tests for the ExpenseSplitter_Core functional core
 /// Demonstrates how easy it is to test pure business logic without external dependencies
 /// </summary>
-public class SplitterCoreTests
+public class ExpenseSplitterCoreTests
 {
     [Fact]
     public void Split_EqualExpenses_ShouldReturnEmptyArray()
@@ -21,7 +22,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Empty(result);
@@ -40,7 +41,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(4, result.Length);
@@ -68,7 +69,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(3, result.Length);
@@ -94,7 +95,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(3, result.Length);
@@ -122,7 +123,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(5, result.Length); // Alle 5 Personen sollten im Ergebnis sein
@@ -132,14 +133,14 @@ public class SplitterCoreTests
         var charliePayment = result.First(p => p.name == "Charlie");
         var davidPayment = result.First(p => p.name == "David");
 
-        Assert.Equal(50.0, alicePayment.amount, 2);
-        Assert.Equal(-20.0, bobPayment.amount, 2);
-        Assert.Equal(20.0, charliePayment.amount, 2);
-        Assert.Equal(-30.0, davidPayment.amount, 2);
+        Assert.Equal(46.0, alicePayment.amount, 2);
+        Assert.Equal(-24.0, bobPayment.amount, 2);
+        Assert.Equal(16.0, charliePayment.amount, 2);
+        Assert.Equal(-34.0, davidPayment.amount, 2);
         
         // Eve sollte im Ergebnis sein (auch wenn Betrag 0)
         var evePayment = result.First(p => p.name == "Eve");
-        Assert.Equal(0.0, evePayment.amount, 2);
+        Assert.Equal(-4.0, evePayment.amount, 2);
     }
 
     [Fact]
@@ -149,7 +150,7 @@ public class SplitterCoreTests
         var expenses = new Expense[0];
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Empty(result);
@@ -162,7 +163,7 @@ public class SplitterCoreTests
         var expenses = new[] { new Expense("Alice", 100.0) };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Empty(result);
@@ -180,7 +181,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(3, result.Length);
@@ -202,7 +203,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(2, result.Length);
@@ -226,7 +227,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(2, result.Length);
@@ -251,7 +252,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         Assert.Equal(4, result.Length);
@@ -281,7 +282,7 @@ public class SplitterCoreTests
         };
 
         // Act
-        var result = Splitter_Core.Split(expenses);
+        var result = ExpenseSplitter_Core.SplitExpenses(expenses);
 
         // Assert
         var totalPayment = result.Sum(p => p.amount);

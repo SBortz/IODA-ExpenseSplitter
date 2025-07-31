@@ -20,7 +20,7 @@ var processor = new ExpenseProcessor_Processor(fileProvider, validationEngine);
 var reportGenerator = new ReportGenerator_Portal();
 
 // Top Layer (1 cell): ExpenseSplitterApplication_Application
-var app = new ExpenseSplitterApplication_Application(consoleUI, processor, reportGenerator);
+var app = new Application(consoleUI, processor, reportGenerator);
 
 app.Run();
 

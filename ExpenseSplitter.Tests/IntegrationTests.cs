@@ -1,4 +1,5 @@
 using ExpenseSplitter.Core;
+using ExpenseSplitter.DataContracts;
 using ExpenseSplitter.Portals;
 using ExpenseSplitter.Processors;
 using ExpenseSplitter.Providers;
@@ -16,10 +17,10 @@ public class IntegrationTests
     public void CompleteFlow_WithRealComponents_ShouldWorkCorrectly()
     {
         // Arrange - Construction phase (wie in Program.cs)
-        var provider = new ExpenseRepository();
-        var processor = new Processor(provider);
-        var portal = new UI();
-        var application = new ExpenseSplitter.Application.Application(portal, processor);
+        var provider = new FileExpenseProvider();
+        var processor = new ExpenseProcessor_Processor(provider, new ValidationEngine_Core());
+        var portal = new ConsoleUI_Portal();
+        var application = new ExpenseSplitter.Application.Application(portal, processor, new ReportGenerator_Portal());
 
         // Act - Application phase
         application.Run();
@@ -35,9 +36,9 @@ public class IntegrationTests
     {
         // Arrange - Construction with mocks
         var mockProvider = new MockExpenseProvider();
-        var processor = new Processor(mockProvider);
+        var processor = new ExpenseProcessor_Processor(mockProvider, new ValidationEngine_Core());
         var mockPortal = new MockPortal();
-        var application = new ExpenseSplitter.Application.Application(mockPortal, processor);
+        var application = new ExpenseSplitter.Application.Application(mockPortal, processor, new ReportGenerator_Portal());
 
         // Act - Application phase
         application.Run();
@@ -73,7 +74,7 @@ public class IntegrationTests
             new Expense("Alice", 100.0),
             new Expense("Bob", 50.0)
         };
-        var coreResult = Splitter_Core.Split(expenses);
+        var coreResult = ExpenseSplitter_Core.SplitExpenses(expenses);
         Assert.Equal(2, coreResult.Length);
 
         // Provider: Data access abstraction
@@ -81,8 +82,8 @@ public class IntegrationTests
         var providerResult = provider.Load();
         Assert.Equal(4, providerResult.Length);
 
-        // Processor: Integration of core and provider
-        var processor = new Processor(provider);
+        // ExpenseProcessor_Processor: Integration of core and provider
+        var processor = new ExpenseProcessor_Processor(provider, new ValidationEngine_Core());
         var processorResult = processor.SplitCosts();
         Assert.Equal(4, processorResult.Length);
 
@@ -92,7 +93,7 @@ public class IntegrationTests
         Assert.True(portal.PrintWasCalled);
 
         // Application: High-level orchestration
-        var application = new ExpenseSplitter.Application.Application(portal, processor);
+        var application = new ExpenseSplitter.Application.Application(portal, processor, new ReportGenerator_Portal());
         application.Run();
         Assert.True(portal.PrintWasCalled);
     }
@@ -104,7 +105,7 @@ public class IntegrationTests
         
         // Test Core in isolation
         var coreExpenses = new[] { new Expense("Test", 100.0) };
-        var coreResult = Splitter_Core.Split(coreExpenses);
+        var coreResult = ExpenseSplitter_Core.SplitExpenses(coreExpenses);
         Assert.Empty(coreResult); // Single expense should return empty array
 
         // Test Provider in isolation
@@ -112,8 +113,8 @@ public class IntegrationTests
         var providerResult = mockProvider.Load();
         Assert.Equal(4, providerResult.Length);
 
-        // Test Processor with mocked provider
-        var processor = new Processor(mockProvider);
+        // Test ExpenseProcessor_Processor with mocked provider
+        var processor = new ExpenseProcessor_Processor(mockProvider, new ValidationEngine_Core());
         var processorResult = processor.SplitCosts();
         Assert.Equal(4, processorResult.Length);
 
@@ -123,7 +124,7 @@ public class IntegrationTests
         Assert.True(mockPortal.PrintWasCalled);
 
         // Test Application with mocked components
-        var application = new ExpenseSplitter.Application.Application(mockPortal, processor);
+        var application = new ExpenseSplitter.Application.Application(mockPortal, processor, new ReportGenerator_Portal());
         application.Run();
         Assert.True(mockPortal.PrintWasCalled);
     }

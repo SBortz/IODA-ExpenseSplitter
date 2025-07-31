@@ -1,5 +1,6 @@
 using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
 using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
+using ExpenseSplitter._02_ExpenseSplitter.CurrencyConverter.DataContracts;
 
 namespace ExpenseSplitter._02_ExpenseSplitter;
 
@@ -9,13 +10,13 @@ namespace ExpenseSplitter._02_ExpenseSplitter;
 public class FileExpens_Provider : IFileExpense_Provider
 {
     /// <summary>
-    /// Load expenses from expenses.txt file
+    /// Load currency expenses from expenses.txt file (with currency column)
     /// </summary>
-    public Expense[] Load()
+    public CurrencyExpense[] LoadExpenses()
     {
         return System.IO.File.ReadAllLines("expenses.txt")
             .Select(x => x.Split(','))
-            .Select(x => new Expense(x[0], double.Parse(x[1])))
+            .Select(x => new CurrencyExpense(x[0], double.Parse(x[1]), x[2]))
             .ToArray();
     }
 } 

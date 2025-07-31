@@ -1,4 +1,4 @@
-using ExpenseSplitter._03_ExpenseSplitter.Interfaces;
+using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
 using ExpenseSplitter._99_IODA_BuildingBlocks;
 
 namespace ExpenseSplitter._01_Application;

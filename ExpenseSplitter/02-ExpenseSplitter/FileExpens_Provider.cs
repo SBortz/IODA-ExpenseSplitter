@@ -1,12 +1,12 @@
-using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._99_IODA_BuildingBlocks;
+using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter._03_ExpenseSplitter;
+namespace ExpenseSplitter._02_ExpenseSplitter;
 
 /// <summary>
 /// Expense repository - loads expenses from file
 /// </summary>
-public class FileExpenseExpenseProvider : IFileExpense_Provider
+public class FileExpens_Provider : IFileExpense_Provider
 {
     /// <summary>
     /// Load expenses from expenses.txt file

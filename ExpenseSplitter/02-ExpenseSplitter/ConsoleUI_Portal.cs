@@ -1,7 +1,7 @@
-using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
-using ExpenseSplitter._03_ExpenseSplitter.Interfaces;
+using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
 
-namespace ExpenseSplitter._03_ExpenseSplitter;
+namespace ExpenseSplitter._02_ExpenseSplitter;
 
 /// <summary>
 /// Console UI - handles user interaction and display

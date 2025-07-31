@@ -1,14 +1,14 @@
-using ExpenseSplitter._03_ExpenseSplitter;
-using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._02_ExpenseSplitter.Interfaces;
 using ExpenseSplitter._99_IODA_BuildingBlocks;
 
-namespace ExpenseSplitter._02_Processors;
+namespace ExpenseSplitter._02_ExpenseSplitter;
 
-public class ExpenseProcessor_Processor : IProcessor
+public class ExpenseSplitter_Processor : IProcessor
 {
     private readonly IFileExpense_Provider _repo;
 
-    public ExpenseProcessor_Processor(IFileExpense_Provider repo)
+    public ExpenseSplitter_Processor(IFileExpense_Provider repo)
     {
         _repo = repo;
     }

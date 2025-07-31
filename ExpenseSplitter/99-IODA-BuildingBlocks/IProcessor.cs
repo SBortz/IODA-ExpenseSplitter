@@ -1,4 +1,4 @@
-using ExpenseSplitter._03_ExpenseSplitter.DataContracts;
+using ExpenseSplitter._02_ExpenseSplitter.DataContracts;
 
 namespace ExpenseSplitter._99_IODA_BuildingBlocks;
 
